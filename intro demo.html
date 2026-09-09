@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-width=1.0">
+<title>緣 YEON - 기억으로 사람과 사람을 잇다</title>
+<style>
+  /* 기본 설정 및 폰트 */
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&family=Noto+Serif+KR:wght@400;700&display=swap');
+
+  html, body {
+    margin: 0; padding: 0; 
+    background: #0a0a0f; color: #f2f2f5;
+    font-family: 'Noto Sans KR', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* --- 인트로 애니메이션 영역 --- */
+  #intro-screen {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: #0a0a0f;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999;
+    transition: opacity 1s ease-in-out;
+  }
+  .stage { position: relative; width: 600px; height: 700px; }
+  .stage svg { width: 100%; height: 100%; }
+
+  .glyph {
+    opacity: 0; transform-origin: 300px 260px;
+    animation: glyphIn 1s ease-out 0.15s forwards;
+  }
+  @keyframes glyphIn {
+    0%   { opacity: 0; transform: scale(0.85); filter: blur(8px); }
+    100% { opacity: 1; transform: scale(1); filter: blur(0); }
+  }
+
+  .net-line {
+    stroke: #6C7CE0; stroke-width: 2.5; fill: none;
+    stroke-dasharray: 120; stroke-dashoffset: 120; opacity: 0;
+    animation: lineDraw 0.45s ease-out forwards;
+  }
+  @keyframes lineDraw {
+    0%   { opacity: 0; stroke-dashoffset: 120; }
+    15%  { opacity: 1; }
+    100% { opacity: 0.85; stroke-dashoffset: 0; }
+  }
+
+  .net-node {
+    fill: #8B9CFF; opacity: 0; transform-box: fill-box; transform-origin: center;
+    animation: nodePop 0.5s cubic-bezier(.34,1.56,.64,1) forwards, nodePulse 2.2s ease-in-out infinite;
+  }
+  @keyframes nodePop {
+    0%   { opacity: 0; transform: scale(0); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  @keyframes nodePulse {
+    0%, 100% { filter: drop-shadow(0 0 0px #8B9CFF); }
+    50%      { filter: drop-shadow(0 0 6px #8B9CFF); }
+  }
+
+  .wordmark, .tagline {
+    opacity: 0; transform: translateY(12px);
+    animation: riseIn 0.7s ease-out forwards;
+  }
+  @keyframes riseIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .skip {
+    position: absolute; bottom: 24px; right: 24px;
+    color: #666; font-size: 13px; letter-spacing: 1px; cursor: pointer;
+    opacity: 0; animation: riseIn 0.6s ease-out 2.6s forwards;
+  }
+  .skip:hover { color: #8B9CFF; }
+
+  /* --- 메인 콘텐츠 영역 --- */
+  #main-content {
+    display: none; /* 인트로 종료 후 block으로 변경 */
+    opacity: 0;
+    animation: fadeIn 1.5s ease-in forwards;
+  }
+  @keyframes fadeIn { to { opacity: 1; } }
+
+  /* 헤더 및 메뉴 */
+  header {
+    position: fixed; top: 0; left: 0; width: 100%; height: 80px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 50px; box-sizing: border-box;
+    background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(10px);
+    z-index: 1000; border-bottom: 1px solid rgba(139, 156, 255, 0.1);
+  }
+  .logo img {
+    height: 50px;
+    /* 로고가 검은색일 경우 다크 테마에 맞게 반전. 원본 사용시 삭제 가능 */
+    filter: invert(1) hue-rotate(180deg) brightness(1.5); 
+  }
+  nav ul {
+    list-style: none; display: flex; gap: 40px; margin: 0; padding: 0;
+  }
+  nav ul li a {
+    color: #9a9aa5; text-decoration: none; font-size: 14px; font-weight: 700; letter-spacing: 1px;
+    transition: color 0.3s; position: relative;
+  }
+  nav ul li a:hover { color: #8B9CFF; }
+  nav ul li a::before {
+    content: ''; position: absolute; left: -15px; top: 50%; transform: translateY(-50%);
+    width: 6px; height: 6px; border-radius: 50%; background: #8B9CFF;
+    opacity: 0; transition: opacity 0.3s;
+    box-shadow: 0 0 6px #8B9CFF;
+  }
+  nav ul li a:hover::before { opacity: 1; }
+
+  /* 각 섹션 공통 */
+  section {
+    min-height: 100vh; padding: 100px 10vw;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .section-title {
+    font-family: 'Noto Serif KR', serif; font-size: 48px; color: #f2f2f5;
+    margin-bottom: 20px; font-weight: 700;
+  }
+  .section-desc { font-size: 18px; color: #9a9aa5; line-height: 1.6; margin-bottom: 60px; }
+
+  /* 히어로 섹션 */
+  #hero { align-items: center; text-align: center; background: radial-gradient(circle at center, #1a1a2e 0%, #0a0a0f 70%); }
+  #hero h1 { font-family: 'Noto Serif KR', serif; font-size: 64px; margin-bottom: 20px; }
+  #hero h1 span { color: #8B9CFF; }
+  #hero p { font-size: 24px; color: #9a9aa5; font-weight: 300; }
+
+  /* 카드 레이아웃 (서비스, 공헌) */
+  .card-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
+  }
+  .card {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(139, 156, 255, 0.2);
+    padding: 40px; border-radius: 8px; transition: transform 0.3s, background 0.3s;
+  }
+  .card:hover {
+    transform: translateY(-10px); background: rgba(139, 156, 255, 0.05);
+    border-color: #8B9CFF;
+  }
+  .card h3 { font-size: 24px; color: #8B9CFF; margin-top: 0; margin-bottom: 15px; }
+  .card p { color: #9a9aa5; line-height: 1.6; font-size: 15px; }
+  .card ul { padding-left: 20px; color: #f2f2f5; font-size: 14px; line-height: 1.8; margin-top: 15px;}
+
+  /* 푸터 */
+  footer {
+    padding: 40px 10vw; background: #050508; color: #666;
+    display: flex; justify-content: space-between; font-size: 13px; border-top: 1px solid #1a1a2e;
+  }
+</style>
+</head>
+<body>
+
+  <!-- 인트로 애니메이션 -->
+  <div id="intro-screen">
+    <div class="stage">
+      <svg viewBox="0 0 600 700">
+        <!-- 1. 한자 -->
+        <text class="glyph" x="300" y="260" text-anchor="middle" dominant-baseline="central"
+          font-family="'Noto Serif KR','Malgun Gothic',serif" font-size="220" font-weight="700" fill="#f2f2f5">緣</text>
+
+        <!-- 2. 네트워크 오버레이 -->
+        <g>
+          <line class="net-line" style="animation-delay:1.15s" x1="215" y1="170" x2="265" y2="210"/>
+          <line class="net-line" style="animation-delay:1.30s" x1="265" y1="210" x2="320" y2="180"/>
+          <line class="net-line" style="animation-delay:1.45s" x1="320" y1="180" x2="380" y2="230"/>
+          <line class="net-line" style="animation-delay:1.30s" x1="265" y1="210" x2="250" y2="290"/>
+          <line class="net-line" style="animation-delay:1.50s" x1="250" y1="290" x2="305" y2="340"/>
+          <line class="net-line" style="animation-delay:1.65s" x1="305" y1="340" x2="365" y2="310"/>
+          <line class="net-line" style="animation-delay:1.45s" x1="320" y1="180" x2="375" y2="160"/>
+
+          <circle class="net-node" style="animation-delay:1.15s, 2.6s" cx="215" cy="170" r="6"/>
+          <circle class="net-node" style="animation-delay:1.30s, 2.6s" cx="265" cy="210" r="6"/>
+          <circle class="net-node" style="animation-delay:1.45s, 2.6s" cx="320" cy="180" r="6"/>
+          <circle class="net-node" style="animation-delay:1.60s, 2.6s" cx="380" cy="230" r="6"/>
+          <circle class="net-node" style="animation-delay:1.50s, 2.6s" cx="250" cy="290" r="6"/>
+          <circle class="net-node" style="animation-delay:1.65s, 2.6s" cx="305" cy="340" r="6"/>
+          <circle class="net-node" style="animation-delay:1.80s, 2.6s" cx="365" cy="310" r="6"/>
+          <circle class="net-node" style="animation-delay:1.45s, 2.6s" cx="375" cy="160" r="6"/>
+        </g>
+
+        <!-- 3. 워드마크 -->
+        <text class="wordmark" style="animation-delay:2.05s" x="300" y="470" text-anchor="middle"
+          font-family="'Noto Sans KR',sans-serif" font-size="34" font-weight="800" letter-spacing="2" fill="#f2f2f5">緣<tspan fill="#8B9CFF">YEON</tspan></text>
+        <text class="tagline" style="animation-delay:2.25s" x="300" y="502" text-anchor="middle"
+          font-family="'Noto Sans KR',sans-serif" font-size="15" fill="#9a9aa5">사람과 사람을 잇다</text>
+      </svg>
+      <div class="skip" onclick="skipIntro()">SKIP →</div>
+    </div>
+  </div>
+
+  <!-- 메인 콘텐츠 -->
+  <div id="main-content">
+    <header>
+      <div class="logo">
+        <a href="#"><img src="logo_light.png" alt="YEON Logo"></a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#about">ABOUT YEON</a></li>
+          <li><a href="#service">CORE SERVICE</a></li>
+          <li><a href="#social">CONTRIBUTION</a></li>
+          <li><a href="#connect">CONNECT</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section id="hero">
+      <h1>기억으로 <span>사람과 사람</span>을 잇다</h1>
+      <p>기억은 사라지는 것이 아니라, 이어지는 것이다.</p>
+    </section>
+
+    <section id="about">
+      <div class="section-title">Philosophy</div>
+      <div class="section-desc">23세기의 고도화된 신경 과학 기술을 바탕으로, 우리는 기술의 발전보다 인간의 존엄을 먼저 생각합니다.<br>Memory < Connection</div>
+    </section>
+
+    <section id="service">
+      <div class="section-title">Core Services</div>
+      <div class="section-desc">당신의 소중한 기억을 보존하고, 경험하며, 나눕니다.</div>
+      <div class="card-grid">
+        <div class="card">
+          <h3>AI Memory Avatar</h3>
+          <p>고인의 생전 데이터와 성격을 분석하여 4D 공간에서 마지막 대화를 나눌 수 있는 자사의 대표 서비스입니다.</p>
+          <ul>
+            <li>유족 1인당 1회 이용 가능</li>
+            <li>미처 전하지 못한 마음을 연결</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Memory Archive</h3>
+          <p>가장 온전한 순간의 기억을 보관합니다. 소실된 해상도는 자사의 기술력으로 완벽하게 채워 넣습니다.</p>
+          <ul>
+            <li>월 1회 기억 체험 구독 서비스</li>
+            <li>사후 지정인에게 기억 공개 가능</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Memory Sharing</h3>
+          <p>자신의 기억을 타인에게 직접 경험하게 하여, 완벽한 이해와 공감을 이끌어냅니다.</p>
+          <ul>
+            <li>연인 및 특정 관계 매칭 상품</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="social">
+      <div class="section-title">Social Contribution</div>
+      <div class="section-desc">기업의 높은 신뢰도를 바탕으로, 사회적 책임과 공익을 실천합니다.</div>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Memory Donation</h3>
+          <p>역사적 사건이나 특정 전문 직업의 경험을 공공재로 기증하여 후세의 교육 목적으로 활용합니다.</p>
+        </div>
+        <div class="card">
+          <h3>Memory Reconstruction</h3>
+          <p>사고, 뇌손상, 치매 등 의료적 문제로 소실된 환자의 기억을 안전하게 복원합니다.</p>
+        </div>
+        <div class="card">
+          <h3>Memory Extraction</h3>
+          <p>범죄 피해자의 기억을 추출하여 사건의 진상을 밝히고, 정의를 구현하는 데 협조합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>&copy; 2250 緣 YEON Corp. All rights reserved.</div>
+      <div>23rd Century Neurological Ethics Committee Approved.</div>
+    </footer>
+  </div>
+
+  <script>
+    // 인트로 스킵 및 자동 전환 스크립트
+    const introScreen = document.getElementById('intro-screen');
+    const mainContent = document.getElementById('main-content');
+    
+    function showMain() {
+      introScreen.style.opacity = '0';
+      setTimeout(() => {
+        introScreen.style.display = 'none';
+        mainContent.style.display = 'block';
+      }, 1000); // fade out 애니메이션 대기
+    }
+
+    function skipIntro() {
+      showMain();
+    }
+
+    // 4초 후 자동으로 메인 화면 전환 (애니메이션이 끝난 직후)
+    setTimeout(() => {
+      if(introScreen.style.display !== 'none') {
+        showMain();
+      }
+    }, 4500);
+  </script>
+</body>
+</html>

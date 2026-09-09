@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>緣 YEON - 기억으로 사람과 사람을 잇다</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Chonburi&display=swap');
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+
+  * { box-sizing: border-box; }
+
+  html {
+    height: 100%;
+    overflow: hidden;
+  }
+  body {
+    margin: 0; padding: 0;
+    height: 100%;
+    background: #0a0a0f;
+    font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* --- 인트로 애니메이션 영역 --- */
+  #intro-screen {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: #0a0a0f;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999;
+    transition: opacity 1s ease-in-out;
+  }
+  .stage { position: relative; width: 600px; height: 700px; }
+  .stage svg { width: 100%; height: 100%; }
+
+  .glyph {
+    opacity: 0; transform-origin: 300px 260px;
+    animation: glyphIn 1s ease-out 0.15s forwards;
+  }
+  @keyframes glyphIn {
+    0%   { opacity: 0; transform: scale(0.85); filter: blur(8px); }
+    100% { opacity: 1; transform: scale(1); filter: blur(0); }
+  }
+
+  .net-line {
+    stroke: #6C7CE0; stroke-width: 2.5; fill: none;
+    stroke-dasharray: 120; stroke-dashoffset: 120; opacity: 0;
+    animation: lineDraw 0.45s ease-out forwards;
+  }
+  @keyframes lineDraw {
+    0%   { opacity: 0; stroke-dashoffset: 120; }
+    15%  { opacity: 1; }
+    100% { opacity: 0.85; stroke-dashoffset: 0; }
+  }
+
+  .net-node {
+    fill: #8B9CFF; opacity: 0; transform-box: fill-box; transform-origin: center;
+    animation: nodePop 0.5s cubic-bezier(.34,1.56,.64,1) forwards, nodePulse 2.2s ease-in-out infinite;
+  }
+  @keyframes nodePop {
+    0%   { opacity: 0; transform: scale(0); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  @keyframes nodePulse {
+    0%, 100% { filter: drop-shadow(0 0 0px #8B9CFF); }
+    50%      { filter: drop-shadow(0 0 6px #8B9CFF); }
+  }
+
+  .wordmark, .tagline {
+    opacity: 0; transform: translateY(12px);
+    animation: riseIn 0.7s ease-out forwards;
+  }
+  @keyframes riseIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .skip {
+    position: absolute; bottom: 24px; right: 24px;
+    color: #666; font-size: 13px; letter-spacing: 1px; cursor: pointer;
+    opacity: 0; animation: riseIn 0.6s ease-out 2.6s forwards;
+  }
+  .skip:hover { color: #8B9CFF; }
+
+  /* --- 메인 콘텐츠 영역 --- */
+  #main-content {
+    display: none;
+    opacity: 0;
+    background: #ffffff;
+    color: #111114;
+    animation: fadeIn 1.2s ease-in forwards;
+  }
+  @keyframes fadeIn { to { opacity: 1; } }
+
+  /* 상단바 */
+  header {
+    position: fixed; top: 0; left: 0; width: 100%; height: 84px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 60px; box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(8px);
+    z-index: 1000; border-bottom: 1px solid #eaeaef;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 10px; user-select: none;
+  }
+  .logo img {
+    height: 42px; width: auto; display: block;
+  }
+  .logo .logo-text {
+    font-family: 'Chonburi', 'Noto Serif KR', serif; font-size: 24px; font-weight: 400;
+    color: #111114; letter-spacing: 0.5px;
+  }
+  nav ul {
+    list-style: none; display: flex; gap: 46px; margin: 0; padding: 0;
+  }
+  nav ul li a {
+    color: #4A4A4A; text-decoration: none; font-size: 15px; font-weight: 500; letter-spacing: 0.2px;
+    transition: color 0.3s;
+  }
+  nav ul li a:hover { color: #6C7CE0; }
+
+  /* MEMORY 히어로 섹션 */
+  #memory-hero {
+    height: 100vh; padding-top: 84px; box-sizing: border-box;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+  }
+  #memory-hero h1 {
+    font-size: 96px; font-weight: 800; letter-spacing: -1px;
+    margin: 0 0 22px 0; color: #111114;
+  }
+  #memory-hero p {
+    font-size: 22px; font-weight: 400; color: #6a6a72; margin: 0;
+  }
+
+  /* 스크롤 연결선 트랙 */
+  #line-track {
+    position: relative; height: 55vh; width: 2px; margin: 0 auto;
+  }
+  #line-track .line {
+    position: absolute; top: 0; left: 0; width: 2px; height: 0%;
+    background: #111114;
+  }
+
+  /* CONNECT 섹션 */
+  #connect-section {
+    height: 100vh; box-sizing: border-box;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+  }
+  #connect-section.visible { opacity: 1; transform: translateY(0); }
+  #connect-section h2 {
+    font-size: 96px; font-weight: 800; letter-spacing: -1px;
+    margin: 0 0 22px 0; color: #111114;
+  }
+  #connect-section p {
+    font-size: 22px; font-weight: 400; color: #6a6a72; margin: 0;
+  }
+</style>
+</head>
+<body>
+
+  <!-- 인트로 애니메이션 -->
+  <div id="intro-screen">
+    <div class="stage">
+      <svg viewBox="0 0 600 700">
+        <!-- 1. 한자 -->
+        <text class="glyph" x="300" y="260" text-anchor="middle" dominant-baseline="central"
+          font-family="'Noto Serif KR','Malgun Gothic',serif" font-size="220" font-weight="700" fill="#f2f2f5">緣</text>
+
+        <!-- 2. 네트워크 오버레이 -->
+        <g>
+          <line class="net-line" style="animation-delay:1.15s" x1="215" y1="170" x2="265" y2="210"/>
+          <line class="net-line" style="animation-delay:1.30s" x1="265" y1="210" x2="320" y2="180"/>
+          <line class="net-line" style="animation-delay:1.45s" x1="320" y1="180" x2="380" y2="230"/>
+          <line class="net-line" style="animation-delay:1.30s" x1="265" y1="210" x2="250" y2="290"/>
+          <line class="net-line" style="animation-delay:1.50s" x1="250" y1="290" x2="305" y2="340"/>
+          <line class="net-line" style="animation-delay:1.65s" x1="305" y1="340" x2="365" y2="310"/>
+          <line class="net-line" style="animation-delay:1.45s" x1="320" y1="180" x2="375" y2="160"/>
+
+          <circle class="net-node" style="animation-delay:1.15s, 2.6s" cx="215" cy="170" r="6"/>
+          <circle class="net-node" style="animation-delay:1.30s, 2.6s" cx="265" cy="210" r="6"/>
+          <circle class="net-node" style="animation-delay:1.45s, 2.6s" cx="320" cy="180" r="6"/>
+          <circle class="net-node" style="animation-delay:1.60s, 2.6s" cx="380" cy="230" r="6"/>
+          <circle class="net-node" style="animation-delay:1.50s, 2.6s" cx="250" cy="290" r="6"/>
+          <circle class="net-node" style="animation-delay:1.65s, 2.6s" cx="305" cy="340" r="6"/>
+          <circle class="net-node" style="animation-delay:1.80s, 2.6s" cx="365" cy="310" r="6"/>
+          <circle class="net-node" style="animation-delay:1.45s, 2.6s" cx="375" cy="160" r="6"/>
+        </g>
+
+        <!-- 3. 워드마크 -->
+        <text class="wordmark" style="animation-delay:2.05s" x="300" y="470" text-anchor="middle"
+          font-family="'Pretendard','Malgun Gothic',sans-serif" font-size="34" font-weight="500" letter-spacing="2" fill="#f2f2f5">緣<tspan fill="#8B9CFF">YEON</tspan></text>
+        <text class="tagline" style="animation-delay:2.25s" x="300" y="502" text-anchor="middle"
+          font-family="'Pretendard','Malgun Gothic',sans-serif" font-size="15" fill="#9a9aa5">사람과 사람을 잇다</text>
+      </svg>
+      <div class="skip" onclick="skipIntro()">SKIP →</div>
+    </div>
+  </div>
+
+  <!-- 메인 콘텐츠 -->
+  <div id="main-content">
+    <header>
+      <div class="logo">
+        <img src="logo/logo_light.png" alt="YEON Logo">
+        <span class="logo-text">YEON</span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#">기업 소개</a></li>
+          <li><a href="#">핵심 사업</a></li>
+          <li><a href="#">사회 공헌</a></li>
+          <li><a href="#">체험 신청</a></li>
+          <li><a href="#">고객 지원</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section id="memory-hero">
+      <h1>MEMORY.</h1>
+      <p>기억. 記憶.</p>
+    </section>
+
+    <div id="line-track">
+      <div class="line" id="connect-line"></div>
+    </div>
+
+    <section id="connect-section">
+      <h2>CONNECT.</h2>
+      <p>기억으로 사람과 사람을 잇다.</p>
+    </section>
+  </div>
+
+  <script>
+    const introScreen = document.getElementById('intro-screen');
+    const mainContent = document.getElementById('main-content');
+    const lineTrack = document.getElementById('line-track');
+    const connectLine = document.getElementById('connect-line');
+    const connectSection = document.getElementById('connect-section');
+
+    function showMain() {
+      introScreen.style.opacity = '0';
+      setTimeout(() => {
+        introScreen.style.display = 'none';
+        mainContent.style.display = 'block';
+        updateScrollEffects();
+      }, 1000); // fade out 애니메이션 대기
+    }
+
+    function skipIntro() {
+      showMain();
+    }
+
+    // 인트로 애니메이션이 끝난 직후 자동으로 메인 화면으로 전환
+    setTimeout(() => {
+      if (introScreen.style.display !== 'none') {
+        showMain();
+      }
+    }, 4500);
+
+    // 스크롤에 따라 검은 선이 자라나며 CONNECT 섹션을 연결
+    let ticking = false;
+    function updateScrollEffects() {
+      const rect = lineTrack.getBoundingClientRect();
+      const trackHeight = rect.height;
+      const total = trackHeight + window.innerHeight * 0.6;
+      let progress = (window.innerHeight - rect.top) / total;
+      progress = Math.min(1, Math.max(0, progress));
+
+      connectLine.style.height = (progress * 100) + '%';
+
+      if (progress > 0.85) {
+        connectSection.classList.add('visible');
+      } else {
+        connectSection.classList.remove('visible');
+      }
+      ticking = false;
+    }
+
+    document.body.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateScrollEffects);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    window.addEventListener('resize', updateScrollEffects);
+  </script>
+</body>
+</html>
