@@ -1,3 +1,9 @@
+// 브라우저가 이전 스크롤 위치를 복원해서 중간 지점부터 보이는 것을 방지
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+document.body.scrollTop = 0;
+
 const introScreen = document.getElementById('intro-screen');
 const mainContent = document.getElementById('main-content');
 const lineTrack = document.getElementById('line-track');
@@ -6,6 +12,7 @@ const connectSection = document.getElementById('connect-section');
 const networkSection = document.getElementById('network-section');
 const constellationLines = Array.from(document.querySelectorAll('.constellation-line'));
 const constellationNodes = Array.from(document.querySelectorAll('.constellation-node'));
+let ticking = false;
 
 function showMain() {
   introScreen.style.opacity = '0';
@@ -15,20 +22,31 @@ function showMain() {
     updateScrollEffects();
     initConstellation();
   }, 1000); // fade out 애니메이션 대기
+  sessionStorage.setItem('yeonIntroShown', '1');
 }
 
-// 클릭하면 바로 인트로 스킵
-introScreen.addEventListener('click', showMain);
+// 같은 세션에서 인트로를 이미 봤다면(다른 페이지에서 로고 클릭 등으로 돌아온 경우)
+// 모션그래픽 없이 바로 메인 화면을 보여줌
+if (sessionStorage.getItem('yeonIntroShown') === '1') {
+  introScreen.style.display = 'none';
+  mainContent.style.animation = 'none';
+  mainContent.style.opacity = '1';
+  mainContent.style.display = 'block';
+  updateScrollEffects();
+  initConstellation();
+} else {
+  // 클릭하면 바로 인트로 스킵
+  introScreen.addEventListener('click', showMain);
 
-// 인트로 애니메이션이 끝난 직후 자동으로 메인 화면으로 전환
-setTimeout(() => {
-  if (introScreen.style.display !== 'none') {
-    showMain();
-  }
-}, 4500);
+  // 인트로 애니메이션이 끝난 직후 자동으로 메인 화면으로 전환
+  setTimeout(() => {
+    if (introScreen.style.display !== 'none') {
+      showMain();
+    }
+  }, 4500);
+}
 
 // 스크롤에 따라 검은 선이 자라나며 CONNECT 섹션을 연결
-let ticking = false;
 function updateScrollEffects() {
   const rect = lineTrack.getBoundingClientRect();
   const trackHeight = rect.height;

@@ -102,7 +102,8 @@ nav ul {
   list-style: none; display: flex; gap: 46px; margin: 0; padding: 0;
 }
 nav ul li a {
-  color: #4A4A4A; text-decoration: none; font-size: 15px; font-weight: 500; letter-spacing: 0.2px;
+  font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+  color: #4A4A4A; text-decoration: none; font-size: 17px; font-weight: 500; letter-spacing: 0.2px;
   transition: color 0.3s;
 }
 nav ul li a:hover { color: #6C7CE0; }
@@ -136,7 +137,7 @@ nav ul li a:hover { color: #6C7CE0; }
 
 /* CONNECT 섹션 */
 #connect-section {
-  height: 65vh; padding-top: 56px; box-sizing: border-box;
+  height: 40vh; padding-top: 56px; box-sizing: border-box;
   display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
   text-align: center;
   opacity: 0; transform: translateY(24px);
@@ -155,25 +156,30 @@ nav ul li a:hover { color: #6C7CE0; }
 
 /* 因緣 별자리 섹션 */
 #network-section {
-  min-height: 100vh; padding: 60px 6vw 90px; box-sizing: border-box;
-  display: flex; align-items: center; justify-content: space-between; gap: 40px;
+  min-height: 100vh; padding: 60px 6vw 80px; box-sizing: border-box;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 220px;
   opacity: 0; transform: translateY(24px);
   transition: opacity 0.9s ease-out, transform 0.9s ease-out;
 }
 #network-section.visible { opacity: 1; transform: translateY(0); }
 
+.network-row {
+  width: 100%;
+  display: flex; align-items: center; justify-content: space-between; gap: 40px;
+}
+
 .network-col { flex: 0 0 auto; }
 
 .left-col p {
   font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
-  font-size: 32px; font-weight: 600; line-height: 1.4;
+  font-size: 32px; font-weight: 600; line-height: 38px;
   color: #111114; margin: 0; white-space: nowrap;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
 }
 
 .right-col p {
   font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
-  font-size: 24px; font-weight: 300; line-height: 1.7;
+  font-size: 24px; font-weight: 300; line-height: 29px;
   color: #4A4A4A; margin: 0; white-space: nowrap;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
 }
@@ -227,15 +233,227 @@ nav ul li a:hover { color: #6C7CE0; }
 
 .network-buttons { position: relative; z-index: 1; display: flex; gap: 16px; }
 .pill-btn {
-  display: inline-block; padding: 14px 32px; border: 1.5px solid #111114; border-radius: 999px;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 188px; height: 71px; box-sizing: border-box;
+  border: 2px solid #111114; border-radius: 999px;
   font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
-  color: #111114; text-decoration: none; font-size: 15px; font-weight: 600;
+  color: #111114; text-decoration: none; font-size: 20px; font-weight: 500; letter-spacing: 0;
   transition: background 0.3s, color 0.3s;
 }
 .pill-btn:hover { background: #111114; color: #ffffff; }
 
 @media (max-width: 1100px) {
-  #network-section { flex-direction: column; text-align: center; gap: 30px; }
+  #network-section { gap: 40px; }
+  .network-row { flex-direction: column; text-align: center; gap: 30px; }
   .hanja-wrap { width: 230px; }
   .left-col, .right-col { max-width: 90vw; }
+}
+
+/* --- 기업 소개 페이지 (introduce.html) --- */
+body.light-page {
+  background: #ffffff;
+  color: #111114;
+}
+
+#intro-timeline {
+  position: relative;
+  min-height: 100vh;
+  padding-top: 84px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.timeline {
+  position: relative;
+  display: flex; justify-content: space-between; align-items: flex-end;
+  max-width: 1400px; margin: 240px auto 0; padding: 0 40px;
+  box-sizing: border-box;
+}
+.timeline::before {
+  content: ''; position: absolute; left: 8px; width: calc(100% - 16px); bottom: 8px;
+  height: 2px; background: #6B7CEA; z-index: 0;
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation: timelineLineGrow 1.6s ease-out 0.2s forwards;
+  filter: drop-shadow(0 2px 4px rgba(107, 124, 234, 0.5));
+}
+@keyframes timelineLineGrow {
+  to { transform: scaleX(1); }
+}
+.timeline-item {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: center; gap: 20px;
+}
+.timeline-label {
+  font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+  font-size: 28px; font-weight: 700; color: #111114; white-space: nowrap;
+}
+.timeline-dot {
+  width: 16px; height: 16px; border-radius: 50%; background: #6B7CEA;
+  box-shadow: 0 2px 4px 0 rgba(107, 124, 234, 0.5);
+}
+
+.intro-content {
+  position: relative;
+  max-width: 1400px; margin: 300px auto 140px;
+  padding: 0 40px; box-sizing: border-box;
+}
+.intro-text-wrap {
+  position: relative;
+}
+.intro-watermark {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 260px; height: auto; max-width: 40%;
+  opacity: 0.5;
+  pointer-events: none; user-select: none; z-index: 0;
+}
+.intro-heading {
+  position: relative; z-index: 1;
+  font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+  font-size: 40px; font-weight: 600; letter-spacing: 0; color: #111114;
+  margin: 0 0 56px;
+}
+.intro-body {
+  position: relative; z-index: 1;
+  max-width: none;
+}
+.intro-body p {
+  font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+  font-size: 24px; font-weight: 400; line-height: 33px; letter-spacing: 0;
+  color: #111114; margin: 0 0 36px;
+  white-space: nowrap;
+}
+.intro-body p strong { font-weight: 600; }
+.intro-body .intro-closing { margin-bottom: 0; }
+.intro-body .brand { font-weight: 700; }
+
+.intro-cta {
+  position: relative; z-index: 1;
+  display: flex; justify-content: center;
+  margin-top: 280px;
+}
+.outline-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 188px; height: 71px; box-sizing: border-box;
+  border: 2px solid #000000; border-radius: 999px;
+  background: transparent;
+  font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+  font-size: 20px; font-weight: 500; letter-spacing: 0;
+  color: #111114; text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+}
+.outline-btn:hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+@media (max-width: 900px) {
+  .timeline { flex-wrap: wrap; gap: 30px 20px; margin-top: 100px; }
+  .timeline::before { display: none; }
+  .intro-watermark { width: 180px; }
+  .intro-content { margin-top: 120px; }
+  .intro-heading { font-size: 26px; }
+  .intro-body p { font-size: 15px; white-space: normal; }
+}
+
+/* --- 핵심 사업 / 사회 공헌 페이지 (services.html) --- */
+#services-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 160px 40px 140px;
+  box-sizing: border-box;
+}
+
+.services-tabs {
+  position: relative;
+  display: flex; gap: 56px;
+  margin-bottom: 96px;
+}
+.tab-btn {
+  background: none; border: none; cursor: pointer;
+  font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+  font-size: 30px; font-weight: 700; letter-spacing: 0;
+  color: #919191; padding: 0 0 15px;
+  transition: color 0.25s ease;
+}
+.tab-btn:hover,
+.tab-btn.active {
+  color: #000000;
+}
+.tab-indicator {
+  position: absolute; left: 0; bottom: 0;
+  width: 0; height: 3px;
+  background: #111114;
+  transition: left 0.35s cubic-bezier(.4,0,.2,1), width 0.35s cubic-bezier(.4,0,.2,1);
+}
+
+.service-panel { display: none; }
+.service-panel.active { display: block; }
+
+.service-list { display: flex; flex-direction: column; }
+.service-item {
+  position: relative;
+  padding: 56px 110px 56px 0;
+  border-bottom: 1px solid #e5e5ea;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.75s ease-out, transform 0.75s ease-out;
+}
+.service-item.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+.service-item:first-child { padding-top: 0; }
+.service-item:last-child { border-bottom: none; }
+.service-item:hover .service-link { color: #6C7CE0; }
+
+.service-header {
+  display: flex; align-items: center; gap: 16px;
+}
+.service-icon { width: 27px; height: 27px; flex: 0 0 auto; }
+
+.service-title-group {
+  display: flex; align-items: baseline; gap: 14px; flex: 1; min-width: 0;
+}
+.service-title {
+  font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+  font-size: 32px; font-weight: 600; letter-spacing: 0;
+  color: #111114; margin: 0; white-space: nowrap;
+}
+.service-subtitle {
+  font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+  font-size: 21px; font-weight: 600;
+  color: #919191; white-space: nowrap;
+}
+
+.service-link {
+  position: absolute; right: 0; top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+  font-size: 14px; font-weight: 400;
+  color: #919191; text-decoration: none; white-space: nowrap;
+  transition: color 0.25s ease;
+}
+.service-link:hover { color: #6C7CE0; }
+
+.service-desc {
+  margin: 18px 0 0 43px;
+  font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+  font-size: 18px; font-weight: 400; line-height: 1.6;
+  color: #919191;
+}
+
+@media (max-width: 900px) {
+  #services-section { padding: 120px 24px 90px; }
+  .services-tabs { gap: 32px; margin-bottom: 56px; }
+  .tab-btn { font-size: 19px; }
+  .service-header { flex-wrap: wrap; row-gap: 10px; }
+  .service-title-group { flex-wrap: wrap; row-gap: 6px; }
+  .service-title { font-size: 21px; white-space: normal; }
+  .service-subtitle { font-size: 16px; white-space: normal; }
+  .service-item { padding-right: 0; }
+  .service-link { position: static; transform: none; margin-left: 43px; font-size: 13px; }
+  .service-desc { margin-left: 43px; font-size: 14px; white-space: normal; }
 }

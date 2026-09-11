@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>緣 YEON - 핵심 사업</title>
+<link rel="stylesheet" href="index.css">
+</head>
+<body class="light-page">
+
+  <header>
+    <a href="index.html" class="logo" style="text-decoration: none;">
+      <img src="logo/logo_light.png" alt="YEON Logo">
+      <span class="logo-text">YEON</span>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="introduce.html">기업 소개</a></li>
+        <li><a href="services.html#core">핵심 사업</a></li>
+        <li><a href="services.html#social">사회 공헌</a></li>
+        <li><a href="#">체험 신청</a></li>
+        <li><a href="#">고객 지원</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="services-section">
+    <div class="services-tabs">
+      <button type="button" class="tab-btn" data-tab="core">핵심 사업</button>
+      <button type="button" class="tab-btn" data-tab="social">사회 공헌</button>
+      <span class="tab-indicator"></span>
+    </div>
+
+    <div class="service-panel" data-panel="core">
+      <div class="service-list">
+        <div class="service-item">
+          <div class="service-header">
+            <img class="service-icon" src="figma/별자리1.svg" alt="">
+            <div class="service-title-group">
+              <h3 class="service-title">Memory Archive</h3>
+              <span class="service-subtitle">기억을 보관하다.</span>
+            </div>
+            <a href="#" class="service-link">자세히 보기 →</a>
+          </div>
+          <p class="service-desc">가장 선명한 기억을 담아두고, 정해진 주기에 맞춰 다시 경험합니다.</p>
+        </div>
+
+        <div class="service-item">
+          <div class="service-header">
+            <img class="service-icon" src="figma/별자리2.svg" alt="">
+            <div class="service-title-group">
+              <h3 class="service-title">Memory Sharing</h3>
+              <span class="service-subtitle">기억으로 연결하다.</span>
+            </div>
+            <a href="#" class="service-link">자세히 보기 →</a>
+          </div>
+          <p class="service-desc">나의 기억을 그대로 다른 사람에게 전합니다.</p>
+        </div>
+
+        <div class="service-item">
+          <div class="service-header">
+            <img class="service-icon" src="figma/별자리3.svg" alt="">
+            <div class="service-title-group">
+              <h3 class="service-title">AI Memory Avatar</h3>
+              <span class="service-subtitle">마지막 대화를 장식하다.</span>
+            </div>
+            <a href="#" class="service-link">자세히 보기 →</a>
+          </div>
+          <p class="service-desc">고인의 기억과 음성, 영상, 성격을 바탕으로 아바타를 구현해 4D 공간에서 마지막 대화를 나눕니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-panel" data-panel="social">
+      <div class="service-list">
+        <div class="service-item">
+          <div class="service-header">
+            <img class="service-icon" src="figma/별자리4.svg" alt="">
+            <div class="service-title-group">
+              <h3 class="service-title">Memory Donation</h3>
+              <span class="service-subtitle">기억을 기증하다.</span>
+            </div>
+            <a href="#" class="service-link">자세히 보기 →</a>
+          </div>
+          <p class="service-desc">개인의 경험을 다음 세대를 위한 기억으로 남깁니다.</p>
+        </div>
+
+        <div class="service-item">
+          <div class="service-header">
+            <img class="service-icon" src="figma/별자리5.svg" alt="">
+            <div class="service-title-group">
+              <h3 class="service-title">Memory Reconstruction</h3>
+              <span class="service-subtitle">기억을 복원하다.</span>
+            </div>
+            <a href="#" class="service-link">자세히 보기 →</a>
+          </div>
+          <p class="service-desc">잃어버린 기억을 복원하여 삶의 연결을 되찾습니다.</p>
+        </div>
+
+        <div class="service-item">
+          <div class="service-header">
+            <img class="service-icon" src="figma/별자리6.svg" alt="">
+            <div class="service-title-group">
+              <h3 class="service-title">Memory Extraction</h3>
+              <span class="service-subtitle">기억을 추출하다.</span>
+            </div>
+            <a href="#" class="service-link">자세히 보기 →</a>
+          </div>
+          <p class="service-desc">기억 속에 남겨진 단서를 통해 사건의 진실을 밝힙니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll('.service-item').forEach((item) => {
+      const link = item.querySelector('.service-link');
+      if (!link) return;
+      item.addEventListener('click', (e) => {
+        if (e.target.closest('.service-link')) return;
+        window.location.href = link.getAttribute('href');
+      });
+    });
+
+    const tabButtons = Array.from(document.querySelectorAll('.tab-btn'));
+    const panels = Array.from(document.querySelectorAll('.service-panel'));
+    const tabIndicator = document.querySelector('.tab-indicator');
+
+    function moveIndicator(btn, animate) {
+      if (!btn) return;
+      if (!animate) tabIndicator.style.transition = 'none';
+      tabIndicator.style.left = btn.offsetLeft + 'px';
+      tabIndicator.style.width = btn.offsetWidth + 'px';
+      if (!animate) {
+        tabIndicator.offsetHeight; // 강제 리플로우 후 트랜지션 복원
+        tabIndicator.style.transition = '';
+      }
+    }
+
+    function activateTab(id, animate) {
+      const target = panels.some((p) => p.dataset.panel === id) ? id : 'core';
+      tabButtons.forEach((btn) => btn.classList.toggle('active', btn.dataset.tab === target));
+      panels.forEach((panel) => panel.classList.toggle('active', panel.dataset.panel === target));
+      moveIndicator(tabButtons.find((btn) => btn.dataset.tab === target), animate);
+    }
+
+    tabButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        activateTab(btn.dataset.tab, true);
+        history.replaceState(null, '', '#' + btn.dataset.tab);
+      });
+    });
+
+    window.addEventListener('hashchange', () => {
+      activateTab(location.hash.replace('#', ''), true);
+    });
+
+    window.addEventListener('resize', () => {
+      moveIndicator(tabButtons.find((btn) => btn.classList.contains('active')), false);
+    });
+
+    if (document.fonts) {
+      document.fonts.ready.then(() => {
+        moveIndicator(tabButtons.find((btn) => btn.classList.contains('active')), false);
+      });
+    }
+
+    activateTab(location.hash.replace('#', ''), false);
+
+    // 처음 페이지에 들어왔을 때만: 현재 보이는 탭의 항목을 위에서부터 순서대로 빠르게 페이드인
+    // 탭 전환 시에는 재생되지 않도록, 숨겨진 탭의 항목은 애니메이션 없이 바로 최종 상태로 설정
+    panels.forEach((panel) => {
+      const items = Array.from(panel.querySelectorAll('.service-item'));
+      if (panel.classList.contains('active')) {
+        items.forEach((item, i) => {
+          setTimeout(() => item.classList.add('in-view'), i * 150);
+        });
+      } else {
+        items.forEach((item) => item.classList.add('in-view'));
+      }
+    });
+  </script>
+</body>
+</html>

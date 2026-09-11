@@ -48,15 +48,15 @@
   <!-- 메인 콘텐츠 -->
   <div id="main-content">
     <header>
-      <div class="logo">
+      <a href="index.html" class="logo" style="text-decoration: none;">
         <img src="logo/logo_light.png" alt="YEON Logo">
         <span class="logo-text">YEON</span>
-      </div>
+      </a>
       <nav>
         <ul>
-          <li><a href="#">기업 소개</a></li>
-          <li><a href="#">핵심 사업</a></li>
-          <li><a href="#">사회 공헌</a></li>
+          <li><a href="introduce.html">기업 소개</a></li>
+          <li><a href="services.html#core">핵심 사업</a></li>
+          <li><a href="services.html#social">사회 공헌</a></li>
           <li><a href="#">체험 신청</a></li>
           <li><a href="#">고객 지원</a></li>
         </ul>
@@ -78,37 +78,41 @@
     </section>
 
     <section id="network-section">
-      <div class="network-col left-col">
-        <p>기억은 사라지지 않습니다.<br>기억은 이어집니다.</p>
+      <div class="network-row">
+        <div class="network-col left-col">
+          <p>기억은 사라지지 않습니다.<br>기억은 이어집니다.</p>
+        </div>
+
+        <div class="network-col center-col">
+          <div class="hanja-wrap">
+            <div class="hanja-blur"></div>
+            <img class="hanja-visual" src="figma/인연한자.svg" alt="因緣">
+          </div>
+          <svg class="constellation" viewBox="0 0 750 400">
+            <line class="constellation-line" x1="60" y1="90" x2="160" y2="230"/>
+            <line class="constellation-line" x1="160" y1="230" x2="430" y2="320"/>
+            <line class="constellation-line" x1="430" y1="320" x2="560" y2="60"/>
+            <line class="constellation-line" x1="560" y1="60" x2="690" y2="340"/>
+
+            <circle class="constellation-node" cx="60" cy="90" r="8"/>
+            <circle class="constellation-node" cx="160" cy="230" r="8"/>
+            <circle class="constellation-node" cx="430" cy="320" r="8"/>
+            <circle class="constellation-node" cx="560" cy="60" r="8"/>
+            <circle class="constellation-node" cx="690" cy="340" r="8"/>
+          </svg>
+        </div>
+
+        <div class="network-col right-col">
+          <p><strong>緣YEON</strong>은 신경 기술을 통해<br>기억을 보존하고 경험할 수 있게 하며,<br>사람과 사람을 다시 연결합니다.</p>
+        </div>
       </div>
 
-      <div class="network-col center-col">
-        <div class="hanja-wrap">
-          <div class="hanja-blur"></div>
-          <img class="hanja-visual" src="figma/인연한자.svg" alt="因緣">
-        </div>
-        <svg class="constellation" viewBox="0 0 750 400">
-          <line class="constellation-line" x1="60" y1="90" x2="160" y2="230"/>
-          <line class="constellation-line" x1="160" y1="230" x2="430" y2="320"/>
-          <line class="constellation-line" x1="430" y1="320" x2="560" y2="60"/>
-          <line class="constellation-line" x1="560" y1="60" x2="690" y2="340"/>
-
-          <circle class="constellation-node" cx="60" cy="90" r="8"/>
-          <circle class="constellation-node" cx="160" cy="230" r="8"/>
-          <circle class="constellation-node" cx="430" cy="320" r="8"/>
-          <circle class="constellation-node" cx="560" cy="60" r="8"/>
-          <circle class="constellation-node" cx="690" cy="340" r="8"/>
-        </svg>
-        <div class="network-buttons">
-          <a href="#" class="pill-btn">기업 소개</a>
-          <a href="#" class="pill-btn">서비스 둘러보기</a>
-        </div>
-      </div>
-
-      <div class="network-col right-col">
-        <p><strong>緣YEON</strong>은 신경 기술을 통해<br>기억을 보존하고 경험할 수 있게 하며,<br>사람과 사람을 다시 연결합니다.</p>
+      <div class="network-buttons">
+        <a href="introduce.html" class="pill-btn">기업 소개</a>
+        <a href="services.html" class="pill-btn">서비스 둘러보기</a>
       </div>
     </section>
+    
   </div>
 
   <script src="index.js"></script>
