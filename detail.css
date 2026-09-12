@@ -1,0 +1,97 @@
+/* --- 서비스 상세페이지 (AI Memory Avatar.html 등) --- */
+#detail-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 220px 40px 140px;
+  box-sizing: border-box;
+}
+
+.detail-heading {
+  display: flex; flex-direction: column; gap: 10px;
+}
+.detail-title-row {
+  position: relative;
+}
+.detail-icon {
+  position: absolute; left: -44px; top: 50%;
+  transform: translateY(-50%);
+  width: 30px; height: 30px;
+}
+.detail-title {
+  font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+  font-size: 36px; font-weight: 600; letter-spacing: 0;
+  color: #000000; margin: 0;
+}
+.detail-subtitle {
+  font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+  font-size: 24px; font-weight: 600;
+  color: #919191; margin: 0;
+}
+
+.detail-intro {
+  font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+  font-size: 20px; font-weight: 400; line-height: 1.7;
+  color: #000000; margin: 40px 0 200px;
+}
+
+.detail-section-title {
+  font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+  font-size: 24px; font-weight: 600; letter-spacing: 0;
+  color: #000000; margin: 0 0 32px;
+}
+.detail-section-title-spaced { margin-top: 200px; }
+
+.step-list { display: flex; flex-direction: column; }
+.step-item {
+  padding-bottom: 38px;
+  margin-bottom: 38px;
+  border-bottom: 1px solid #e5e5ea;
+}
+.step-item:first-child { padding-top: 0; }
+.step-item:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+
+.step-header {
+  display: flex; align-items: center; gap: 14px;
+}
+.step-num {
+  display: flex; align-items: center; justify-content: center; flex: 0 0 auto;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: #6B7CEA; color: #FFFFFF;
+  font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+  font-size: 20px; font-weight: 600;
+}
+.step-num-highlight { background: #FFB005; }
+
+.step-title-group { display: flex; flex-direction: column; gap: 6px; }
+
+.step-title {
+  font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+  font-size: 20px; font-weight: 600; letter-spacing: 0;
+  color: #000000; margin: 0;
+}
+.step-title-note {
+  font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+  font-size: 20px; font-weight: 600;
+  color: #919191;
+}
+
+.step-desc {
+  margin: 12px 0 0 42px;
+  font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+  font-size: 18px; font-weight: 400; line-height: 1.7;
+  color: #4A4A4A;
+}
+.step-desc strong { font-weight: 600; color: #000000; }
+
+.detail-cta {
+  display: flex; justify-content: center;
+  margin-top: 200px;
+}
+
+@media (max-width: 900px) {
+  #detail-section { padding: 120px 24px 90px; }
+  .detail-icon { position: static; display: block; width: 28px; height: 28px; transform: none; margin-bottom: 10px; }
+  .detail-title { font-size: 26px; }
+  .detail-subtitle { font-size: 16px; }
+  .step-desc { margin-left: 0; }
+}
