@@ -7,7 +7,36 @@
 }
 
 .detail-heading {
-  display: flex; flex-direction: column; gap: 10px;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  text-align: center;
+}
+.detail-heading-visual {
+  flex: 0 0 auto;
+  width: 220px; height: 220px;
+  overflow: visible;
+  transform: rotate(-22deg);
+  margin-bottom: 10px;
+}
+.heading-node {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: headingNodePop 0.6s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+@keyframes headingNodePop {
+  0%   { opacity: 0; transform: scale(0); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.heading-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0;
+  animation: headingLineDraw 0.5s ease-out forwards;
+}
+@keyframes headingLineDraw {
+  0%   { opacity: 0; stroke-dashoffset: 1; }
+  15%  { opacity: 1; }
+  100% { opacity: 1; stroke-dashoffset: 0; }
 }
 .detail-title-row {
   position: relative;
@@ -30,18 +59,20 @@
 
 .detail-intro {
   font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
-  font-size: 20px; font-weight: 400; line-height: 1.7;
+  font-size: 17px; font-weight: 400; line-height: 1.7;
   color: #000000; margin: 40px 0 200px;
+  text-align: center;
 }
 
 .detail-section-title {
   font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
   font-size: 24px; font-weight: 600; letter-spacing: 0;
-  color: #000000; margin: 0 0 32px;
+  color: #000000; margin: 0 auto 32px;
+  max-width: 900px;
 }
 .detail-section-title-spaced { margin-top: 200px; }
 
-.step-list { display: flex; flex-direction: column; }
+.step-list { display: flex; flex-direction: column; max-width: 900px; margin: 0 auto; }
 .step-item {
   padding-bottom: 38px;
   margin-bottom: 38px;
@@ -90,6 +121,7 @@
 
 @media (max-width: 900px) {
   #detail-section { padding: 120px 24px 90px; }
+  .detail-heading-visual { width: 150px; height: 150px; }
   .detail-icon { position: static; display: block; width: 28px; height: 28px; transform: none; margin-bottom: 10px; }
   .detail-title { font-size: 26px; }
   .detail-subtitle { font-size: 16px; }
