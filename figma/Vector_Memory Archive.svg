@@ -1,0 +1,20 @@
+<svg width="372" height="372" viewBox="0 0 372 372" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="372" height="372" fill="white"/>
+<line x1="222" y1="58.5" x2="149" y2="58.5" stroke="#6B7CEA"/>
+<line x1="211" y1="307.5" x2="161" y2="307.5" stroke="#6B7CEA"/>
+<circle cx="149" cy="58" r="6" fill="#6B7CEA"/>
+<circle cx="222" cy="58" r="6" fill="#6B7CEA"/>
+<circle cx="186" cy="196" r="6" fill="#FFB005"/>
+<circle cx="161" cy="132" r="6" fill="#6B7CEA"/>
+<circle cx="103" cy="186" r="6" fill="#6B7CEA"/>
+<circle cx="161" cy="307" r="6" fill="#6B7CEA"/>
+<line x1="149.494" y1="57.92" x2="161.494" y2="131.92" stroke="#6B7CEA"/>
+<line x1="161.341" y1="132.366" x2="103.341" y2="186.366" stroke="#6B7CEA"/>
+<line x1="103.455" y1="185.792" x2="161.455" y2="312.792" stroke="#6B7CEA"/>
+<circle cx="6" cy="6" r="6" transform="matrix(-1 0 0 1 217 126)" fill="#6B7CEA"/>
+<circle cx="6" cy="6" r="6" transform="matrix(-1 0 0 1 275 180)" fill="#6B7CEA"/>
+<circle cx="6" cy="6" r="6" transform="matrix(-1 0 0 1 217 301)" fill="#6B7CEA"/>
+<line y1="-0.5" x2="74.9667" y2="-0.5" transform="matrix(-0.160071 0.987105 0.987105 0.160071 223 58)" stroke="#6B7CEA"/>
+<line y1="-0.5" x2="79.2465" y2="-0.5" transform="matrix(0.731894 0.681418 0.681418 -0.731894 211 132)" stroke="#6B7CEA"/>
+<line y1="-0.5" x2="139.617" y2="-0.5" transform="matrix(-0.415421 0.909629 0.909629 0.415421 269 186)" stroke="#6B7CEA"/>
+</svg>

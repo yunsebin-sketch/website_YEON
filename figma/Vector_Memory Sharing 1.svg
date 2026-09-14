@@ -1,0 +1,26 @@
+<svg width="372" height="372" viewBox="0 0 372 372" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="372" height="372" fill="white"/>
+<ellipse cx="351" cy="185.5" rx="8" ry="7.5" fill="#6B7CEA"/>
+<ellipse cx="20" cy="185.5" rx="8" ry="7.5" fill="#6B7CEA"/>
+<ellipse cx="72.5" cy="112" rx="7.5" ry="8" fill="#6B7CEA"/>
+<circle cx="238" cy="112" r="8" fill="#6B7CEA"/>
+<ellipse cx="72.5" cy="259" rx="7.5" ry="8" fill="#6B7CEA"/>
+<circle cx="238" cy="259" r="8" fill="#6B7CEA"/>
+<circle cx="133" cy="112" r="8" fill="#6B7CEA"/>
+<ellipse cx="298.5" cy="112" rx="7.5" ry="8" fill="#6B7CEA"/>
+<circle cx="133" cy="259" r="8" fill="#6B7CEA"/>
+<ellipse cx="298.5" cy="259" rx="7.5" ry="8" fill="#6B7CEA"/>
+<line x1="72" y1="111" x2="133" y2="111" stroke="#6B7CEA" stroke-width="2"/>
+<line x1="234" y1="111" x2="295" y2="111" stroke="#6B7CEA" stroke-width="2"/>
+<line x1="238" y1="258" x2="299" y2="258" stroke="#6B7CEA" stroke-width="2"/>
+<line x1="72" y1="258" x2="133" y2="258" stroke="#6B7CEA" stroke-width="2"/>
+<line x1="19.073" y1="184.919" x2="71.6536" y2="111.306" stroke="#6B7CEA" stroke-width="2"/>
+<line x1="132.122" y1="258.532" x2="184.702" y2="184.919" stroke="#6B7CEA" stroke-width="2"/>
+<line x1="297.751" y1="258.532" x2="350.331" y2="184.919" stroke="#6B7CEA" stroke-width="2"/>
+<line x1="184.703" y1="184.919" x2="237.284" y2="111.306" stroke="#6B7CEA" stroke-width="2"/>
+<line x1="184.703" y1="186.081" x2="132.122" y2="112.468" stroke="#6B7CEA" stroke-width="2"/>
+<line x1="71.654" y1="259.694" x2="19.0734" y2="186.081" stroke="#6B7CEA" stroke-width="2"/>
+<line x1="350.332" y1="186.081" x2="297.751" y2="112.468" stroke="#6B7CEA" stroke-width="2"/>
+<line x1="237.283" y1="259.694" x2="184.702" y2="186.081" stroke="#6B7CEA" stroke-width="2"/>
+<circle cx="185.5" cy="185.5" r="7.5" fill="#FFB005"/>
+</svg>
